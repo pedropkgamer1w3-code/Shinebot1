@@ -1,4 +1,4 @@
-import discord
+import os discord
 from discord.ext import commands
 import os
 
@@ -30,6 +30,9 @@ async def on_ready():
 async def on_command_error(ctx, error):
     print(f'Erro no comando "{ctx.command}": {error}')
 
-TOKEN = "MTUyODg0Mzg1MzAyMzU0MzM4Ng.G9YdHp.N_O7KnDqzr7f-tkK_7KAgZ9LqbK9FdEWPm4qbI"
+TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 
-bot.run(TOKEN)
+if TOKEN:
+    bot.run(TOKEN)
+else:
+    print("ERRO: Variável DISCORD_BOT_TOKEN não encontrada!")
